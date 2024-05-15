@@ -6,7 +6,13 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/15 13:38:21 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/05/15 13:43:05 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/05/15 14:58:28 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Bureaucrat.hpp"
+
+int main (void)
+{
+    return (0);
+}
