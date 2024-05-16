@@ -6,22 +6,27 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/15 13:38:23 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/05/15 14:57:57 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/05/16 13:01:07 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(const std::string &name, int grade)
+#define Bureacrati ::std
+
+Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name)
 {
 	try
 	{
-		/* code */
+		if (grade < 1 || grade > 150)
+			throw Bureaucrat::GradeTooHighException();
 	}
 	catch (const std::exception &e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << RED << e.what() << RESET << '\n';
+		return ;
 	}
+	this->_grade = grade;
 }
 
 Bureaucrat::~Bureaucrat()
@@ -38,17 +43,38 @@ int Bureaucrat::getGrade(void)
 	return (this->_grade);
 }
 
-void	Bureaucrat::incrementGrade(int increment)
+void Bureaucrat::incrementGrade(int increment)
 {
-    this->_grade--;
+	try
+	{
+		if (this->_grade - increment < 1)
+			throw Bureaucrat::GradeTooHighException();
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << RED << e.what() << RESET << '\n';
+		return ;
+	}
+	this->_grade -= increment;
 }
 
-void	Bureaucrat::decrementGrade(int decrement)
+void Bureaucrat::decrementGrade(int decrement)
 {
-    this->_grade++;
+	try
+	{
+		if (this->_grade + decrement > 150)
+			throw Bureaucrat::GradeTooLowException();
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << RED << e.what() << RESET << '\n';
+		return ;
+	}
+	this->_grade += decrement;
 }
 
 std::ostream &operator<<(std::ostream &os, Bureaucrat obj)
 {
-    os << obj.getName() << ", bureaucrat grade" << obj.getGrade() << "." << std::endl;
+	os << obj.getName() << ", bureaucrat grade " << obj.getGrade() << ". " << std::endl;
+	return (os);
 }
