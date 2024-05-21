@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/15 13:38:25 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/05/16 12:55:32 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/05/17 13:42:45 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,26 @@
 class Bureaucrat
 {
   public:
-	class GradeTooHighException : public std::exception
-	{
-		public:
-		const char *what() const noexcept override
-		{
-			return ("Grade is too high!");
-		}
-	};
-	class GradeTooLowException : public std::exception
-	{
-		public:
-		const char *what() const noexcept override
-		{
-			return ("Grade is too high!");
-		}
-	};
 	Bureaucrat(const std::string &name, int grade);
 	~Bureaucrat();
 
 	const std::string getName(void);
 	int getGrade(void);
+	void incrementGrade(void);
 	void incrementGrade(int increment);
+	void decrementGrade(void);
 	void decrementGrade(int decrement);
+
+	class GradeTooHighException : public std::exception
+	{
+		public:
+			const char *what(void) const noexcept override;
+	};
+	class GradeTooLowException : public std::exception
+	{
+		public:
+			const char *what(void) const noexcept override;
+	};
 
   private:
 	const std::string _name;

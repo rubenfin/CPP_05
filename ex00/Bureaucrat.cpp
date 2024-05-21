@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/15 13:38:23 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/05/16 13:01:07 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/05/17 13:36:58 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,14 @@
 
 #define Bureacrati ::std
 
-Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name)
+Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name),
+	_grade(grade)
 {
-	try
-	{
-		if (grade < 1 || grade > 150)
-			throw Bureaucrat::GradeTooHighException();
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << RED << e.what() << RESET << '\n';
-		return ;
-	}
-	this->_grade = grade;
+	if (grade < 1)
+		throw Bureaucrat::GradeTooHighException();
+	else if (grade > 150)
+		throw Bureaucrat::GradeTooLowException();
+	std::cout << "Made bureaucrat " << getName() << " with grade " << getGrade() << std::endl;  
 }
 
 Bureaucrat::~Bureaucrat()
@@ -41,6 +36,21 @@ const std::string Bureaucrat::getName(void)
 int Bureaucrat::getGrade(void)
 {
 	return (this->_grade);
+}
+
+void Bureaucrat::incrementGrade(void)
+{
+	try
+	{
+		if (this->_grade - 1 < 1)
+			throw Bureaucrat::GradeTooHighException();
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << RED << e.what() << RESET << '\n';
+		return ;
+	}
+	this->_grade--;
 }
 
 void Bureaucrat::incrementGrade(int increment)
@@ -58,6 +68,21 @@ void Bureaucrat::incrementGrade(int increment)
 	this->_grade -= increment;
 }
 
+void Bureaucrat::decrementGrade(void)
+{
+	try
+	{
+		if (this->_grade + 1 > 150)
+			throw Bureaucrat::GradeTooLowException();
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << RED << e.what() << RESET << '\n';
+		return ;
+	}
+	this->_grade++;
+}
+
 void Bureaucrat::decrementGrade(int decrement)
 {
 	try
@@ -71,6 +96,16 @@ void Bureaucrat::decrementGrade(int decrement)
 		return ;
 	}
 	this->_grade += decrement;
+}
+
+const char *Bureaucrat::GradeTooHighException::what(void) const noexcept 
+{
+	return (RED "Grade is too High!" RESET);
+}
+
+const char *Bureaucrat::GradeTooLowException::what(void) const noexcept
+{
+	return (RED "Grade is too Low!" RESET);
 }
 
 std::ostream &operator<<(std::ostream &os, Bureaucrat obj)
