@@ -6,12 +6,11 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/15 13:38:23 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/05/31 16:20:59 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/01 12:29:35 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-
 
 Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name),
 	_grade(grade)
@@ -20,7 +19,7 @@ Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name),
 		throw Bureaucrat::GradeTooHighException();
 	else if (grade > 150)
 		throw Bureaucrat::GradeTooLowException();
-	std::cout << "Made bureaucrat " << getName() << " with grade " << getGrade() << std::endl;  
+	std::cout << "Made bureaucrat " << getName() << " with grade " << getGrade() << std::endl;
 }
 
 Bureaucrat::~Bureaucrat()
@@ -98,7 +97,20 @@ void Bureaucrat::decrementGrade(int decrement)
 	this->_grade += decrement;
 }
 
-const char *Bureaucrat::GradeTooHighException::what(void) const noexcept 
+bool Bureaucrat::signForm(Form &form)
+{
+	if (form.getSigned())
+	{
+		std::cout << this->getName() << " tried to sign " << form.getName() << " but the form is already signed! " << std::endl;
+		return (false);
+	}
+	if (form.getSignGrade() < this->getGrade())
+		throw Bureaucrat::GradeTooLowException();
+	std::cout << this->getName() << " signed " << form.getName() << std::endl;
+	return (true);
+}
+
+const char *Bureaucrat::GradeTooHighException::what(void) const noexcept
 {
 	return (RED "Grade is too High!" RESET);
 }
