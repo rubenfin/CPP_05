@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/15 13:38:21 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/05/17 14:16:18 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/02 20:11:59 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(void)
 		{
 			std::cerr << e.what() << std::endl;
 		}
-		
 	}
 
 	std::cout << PINK "\n--throw exception when calling constructor with grade too low--" RESET << std::endl;
@@ -47,10 +46,10 @@ int	main(void)
 		{
 			Bureaucrat Bob("Bob", 2);
 			std::cout << std::endl << Bob << std::endl;
-			Bob.incrementGrade(1);
-			std::cout << Bob << std::endl;
-			Bob.incrementGrade(1);
-			std::cout << Bob << std::endl;
+			Bob.incrementGrade();
+			std::cout << Bob;
+			Bob.incrementGrade();
+			std::cout  << std::endl << Bob << std::endl;
 		}
 		catch (const std::exception &e)
 		{
@@ -66,9 +65,7 @@ int	main(void)
 			std::cout << std::endl << Bob << std::endl;
 			Bob.decrementGrade(3);
 			std::cout << Bob << std::endl;
-			Bob.decrementGrade(1);
-			std::cout << Bob << std::endl;
-			Bob.decrementGrade(1);
+			Bob.decrementGrade();
 			std::cout << Bob << std::endl;
 		}
 		catch (const std::exception &e)
