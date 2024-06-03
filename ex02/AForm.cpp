@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/31 16:37:02 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/02 20:51:05 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/03 12:50:49 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,22 @@ AForm::AForm(const std::string &name, int signGrade,
 		throw AForm::GradeTooHighException();
 	else if (signGrade > 150 || executeGrade > 150)
 		throw AForm::GradeTooLowException();
+}
+AForm::AForm(const AForm &other) : _name(other._name),
+	_signGrade(other._signGrade), _executeGrade(other._executeGrade)
+{
+	std::cout << "AForm Copy constructor called!" << std::endl;
+	*this = other;
+}
+
+AForm &AForm::operator=(const AForm &other)
+{
+	std::cout << "AForm Copy assignment operator called!" << std::endl;
+	if (this != &other)
+	{
+		this->_isSigned = other._isSigned;
+	}
+	return (*this);
 }
 
 AForm::~AForm()

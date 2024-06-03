@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/02 14:32:05 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/02 16:56:42 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/03 12:45:02 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ class RobotomyRequestForm : public AForm
 
   public:
 	RobotomyRequestForm(const std::string &target);
+	RobotomyRequestForm(const RobotomyRequestForm &other);
+	RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
 	~RobotomyRequestForm();
 	std::string getTarget(void) const;
 	void executeForm(void) const;

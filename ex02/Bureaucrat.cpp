@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/15 13:38:23 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/02 20:57:30 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/03 12:50:58 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ Bureaucrat::Bureaucrat(const std::string &name, int signGrade,
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other._name)
 {
-	std::cout << "Copy constructor called!" << std::endl;
+	std::cout << "Bureaucrat Copy constructor called!" << std::endl;
 	*this = other;
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 {
-	std::cout << "Copy assignment operator called!" << std::endl;
+	std::cout << "Bureaucrat Copy assignment operator called!" << std::endl;
 	if (this != &other)
 	{
 		this->_signGrade = other._signGrade;

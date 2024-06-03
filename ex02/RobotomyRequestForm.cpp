@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/02 14:32:03 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/02 18:12:29 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/03 12:51:11 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,22 @@
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm("RobotomyRequestForm",
 	rrSignGrade, rrExecGrade), _target(target)
 {
+}
+
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
+{
+	std::cout << "RobotomyRequestForm Copy constructor called!" << std::endl;
+	*this = other;
+}
+
+RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &other)
+{
+	std::cout << "RobotomyRequestForm Copy assignment operator called!" << std::endl;
+	if (this != &other)
+	{
+		this->_target = other._target;
+	}
+	return (*this);
 }
 
 std::string RobotomyRequestForm::getTarget(void) const

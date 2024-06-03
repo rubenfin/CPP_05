@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/02 14:32:01 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/02 16:56:40 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/03 14:34:16 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ class PresidentialPardonForm : public AForm
 
   public:
 	PresidentialPardonForm(const std::string &target);
+	PresidentialPardonForm(const PresidentialPardonForm &other);
+	PresidentialPardonForm &operator=(const PresidentialPardonForm &other);
 	~PresidentialPardonForm();
 	std::string getTarget(void) const;
+	static AForm *makeForm(AForm *form, std::string type, std::string target);
 	void executeForm(void) const;
 };

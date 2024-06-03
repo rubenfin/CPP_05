@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/02 14:32:03 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/02 18:12:29 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/03 14:36:16 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,33 @@ RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm("Rob
 {
 }
 
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
+{
+	std::cout << "RobotomyRequestForm Copy constructor called!" << std::endl;
+	*this = other;
+}
+
+RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &other)
+{
+	std::cout << "RobotomyRequestForm Copy assignment operator called!" << std::endl;
+	if (this != &other)
+	{
+		this->_target = other._target;
+	}
+	return (*this);
+}
+
 std::string RobotomyRequestForm::getTarget(void) const
 {
 	return (this->_target);
+}
+
+AForm *RobotomyRequestForm::makeForm(AForm *form, std::string type,
+	std::string target)
+{
+	if (form == NULL && type == "robotomy request")
+		return (new RobotomyRequestForm(target));
+	return (form);
 }
 
 void RobotomyRequestForm::executeForm(void) const

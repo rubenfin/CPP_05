@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/31 16:35:17 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/02 18:12:55 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/03 13:50:23 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,36 +29,35 @@ int main(void)
     {
         std::cerr << e.what() << '\n';
     }
-
     std::cout << std::endl;
     
-    try
-    {
-        Bureaucrat Jack = Bureaucrat("Jack", 1, 4);
-        RobotomyRequestForm pres = RobotomyRequestForm("Mozambique");
+    // try
+    // {
+    //     Bureaucrat Jack = Bureaucrat("Jack", 1, 4);
+    //     RobotomyRequestForm pres = RobotomyRequestForm("Mozambique");
     
-        pres.beSigned(Jack);    
-        pres.execute(Jack);
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+    //     pres.beSigned(Jack);    
+    //     pres.execute(Jack);
+    // }
+    // catch(const std::exception& e)
+    // {
+    //     std::cerr << e.what() << '\n';
+    // }
     
-    std::cout << std::endl;
+    // std::cout << std::endl;
     
-    try
-    {
-        Bureaucrat Jack = Bureaucrat("Jack", 1, 150);
-        ShrubberyCreationForm pres = ShrubberyCreationForm("Mozambique");
+    // try
+    // {
+    //     Bureaucrat Jack = Bureaucrat("Jack", 1, 150);
+    //     ShrubberyCreationForm pres = ShrubberyCreationForm("Mozambique");
     
-        pres.beSigned(Jack);    
-        pres.execute(Jack);
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+    //     pres.beSigned(Jack);    
+    //     pres.execute(Jack);
+    // }
+    // catch(const std::exception& e)
+    // {
+    //     std::cerr << e.what() << '\n';
+    // }
     
     return 0;
 }

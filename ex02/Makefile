@@ -4,13 +4,13 @@ CFLAGS = -Wall -Wextra -Werror -g -pedantic -std=c++11 -fsanitize=address
 SRCS = $(wildcard *.cpp) 
 OBJS = $(patsubst %.cpp,obj/%.o,$(SRCS))
 
-TARGET = Form
+TARGET = AForm
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(TARGET)
-	@echo "$(GREEN)Compiled Form!$(DEFAULT)"
+	@echo "$(GREEN)Compiled AForm!$(DEFAULT)"
 
 obj/%.o: %.cpp | obj
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -24,7 +24,7 @@ clean:
 
 fclean: clean
 	@$(RM) $(TARGET)
-	@echo "$(RED)Removed Form!$(DEFAULT)"
+	@echo "$(RED)Removed AForm!$(DEFAULT)"
 
 re: fclean all
 

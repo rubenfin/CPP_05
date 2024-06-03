@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/31 16:36:00 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/02 20:55:44 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/03 12:32:28 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ class AForm
   public:
 	AForm();
 	AForm(const std::string &name, int signGrade, int executeGrade);
+	AForm(const AForm &other);
+	AForm &operator=(const AForm &other);
 	~AForm();
 	const std::string getName(void) const;
 	bool getSigned(void) const;

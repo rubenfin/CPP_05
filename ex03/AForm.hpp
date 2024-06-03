@@ -6,13 +6,16 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/31 16:36:00 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/02 16:35:52 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/03 14:50:23 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include "Bureaucrat.hpp"
+#include <iostream>
+#include <stdexcept>
+#include <string>
 
 #define RED "\033[91m"
 #define GREEN "\033[92m"
@@ -33,17 +36,20 @@ class AForm
 
   public:
 	AForm();
-	AForm(const std::string &name, int signGrade);
 	AForm(const std::string &name, int signGrade, int executeGrade);
-	~AForm();
+	AForm(const AForm &other);
+	AForm &operator=(const AForm &other);
+	virtual ~AForm();
 	const std::string getName(void) const;
 	bool getSigned(void) const;
 	int getSignGrade(void) const;
 	int getExecuteGrade(void) const;
 	void beSigned(Bureaucrat &bureaucrat);
-	void execute(Bureaucrat const & executor) const;
+	void execute(Bureaucrat const &executor) const;
+	static AForm *makeForm(std::string type, std::string target);
 	virtual std::string getTarget(void) const = 0;
 	virtual void executeForm(void) const = 0;
+
 	class GradeTooHighException : public std::exception
 	{
 		public:
@@ -54,4 +60,16 @@ class AForm
 		public:
 		const char *what(void) const noexcept override;
 	};
+	class FormNotSignedException : public std::exception
+	{
+		public:
+		const char *what(void) const noexcept override;
+	};
+	class FormAlreadySignedException : public std::exception
+	{
+		public:
+		const char *what(void) const noexcept override;
+	};
 };
+
+std::ostream operator<<(std::ostream &os,const AForm &form);
