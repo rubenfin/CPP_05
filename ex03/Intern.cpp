@@ -6,13 +6,30 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/02 18:14:45 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/07/24 11:27:13 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/24 12:00:10 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Intern.hpp"
 
 Intern::Intern(void)
+{
+}
+
+Intern::Intern(const Intern &other)
+{
+	std::cout << "Intern Copy constructor called!" << std::endl;
+	*this = other;
+}
+
+Intern &Intern::operator=(const Intern &other)
+{
+    (void)other;
+	std::cout << "AForm Copy assignment operator called!" << std::endl;
+	return (*this);
+}
+
+Intern::~Intern()
 {
 }
 
@@ -34,10 +51,6 @@ AForm	*Intern::makeForm(const std::string &formName, const std::string &target )
         else {
             throw Intern::FormNotFoundException();           
         }
-}
-
-Intern::~Intern()
-{
 }
 
 const char *Intern::FormNotFoundException::what(void) const noexcept

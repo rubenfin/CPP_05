@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/02 18:14:53 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/07/24 09:41:32 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/24 11:57:25 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ class Intern
 {
   public:
 	Intern(void);
+	Intern(const Intern &other);
+	Intern &operator=(const Intern &other);
 	~Intern();
 	AForm *makeForm(const std::string &formName, const std::string &target);
 	class FormNotFoundException : public std::exception
