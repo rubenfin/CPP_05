@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/31 16:35:17 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/03 14:45:02 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/24 11:30:54 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,20 @@ int	main(void)
 {
 	AForm	*form;
 	Intern	Newbie;
-	
+	std::cout << PINK "\n--Making a Bureaucrat called Bob who is going to sign the forms--" RESET << std::endl;
+	Bureaucrat	Bob("Bob", 1, 1);
 	form = NULL;
-	std::cout << PINK "\n--Create all types of forms and form with incorrect type--" RESET << std::endl;
+	std::cout << PINK "\n--Create all types of forms and a form with incorrect type--" RESET << std::endl;
+	
 	{
 		try
 		{
+			std::cout << BLUE "\n--Creating PresidentialPardonForm--" RESET << std::endl;
 			form = Newbie.makeForm("presidential pardon", "Adam");
-			delete form;
-			form = Newbie.makeForm("robotomy request", "Ben");
-			delete form;
-			form = Newbie.makeForm("shrubbery creation", "Homie");
-			delete form;
-			form = Newbie.makeForm("invalid form", "Wrong");
+			std::cout << *form << std::endl;
+			Bob.signForm(*form);
+			std::cout << *form << std::endl;
+			form->execute(Bob);
 			delete form;
 		}
 		catch(const std::exception& e)
@@ -41,15 +42,53 @@ int	main(void)
 			std::cerr << e.what() << std::endl;
 		}
 	}
-	
-	std::cout << PINK "\n-----form functionality test-----" RESET << std::endl;
-	Bureaucrat	Bob("Bob", 100, 5);
-	
-	form = Newbie.makeForm("shrubbery creation", "Bender");
-	// std::cout << *form << std::endl;
-	form->beSigned(Bob);
-	form->execute(Bob);
-	// std::cout << *form << std::endl;
-	delete form;
+	{
+		try
+		{
+			std::cout << BLUE "\n--Creating ShrubberyCreationForm--" RESET << std::endl;
+			form = Newbie.makeForm("shrubbery creation", "big_tree");
+			std::cout << *form << std::endl;
+			Bob.signForm(*form);
+			std::cout << *form << std::endl;
+			form->execute(Bob);
+			delete form;
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+	}
+	{
+		try
+		{
+			std::cout << BLUE "\n--Creating RobotomyRequestForm--" RESET << std::endl;
+			form = Newbie.makeForm("robotomy request", "Jack");
+			std::cout << *form << std::endl;
+			Bob.signForm(*form);
+			std::cout << *form << std::endl;
+			form->execute(Bob);
+			delete form;
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+	}
+	{
+		try
+		{
+			std::cout << BLUE "\n--Creating Form that does not exist--" RESET << std::endl;
+			form = Newbie.makeForm("form that doesn't exist", "Wrong");
+			std::cout << *form << std::endl;
+			Bob.signForm(*form);
+			std::cout << *form << std::endl;
+			form->execute(Bob);
+			delete form;
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/31 16:36:00 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/02 20:42:07 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/04 14:37:49 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ class Form
 	bool getSigned(void) const;
 	int getSignGrade(void) const;
 	int getExecuteGrade(void) const;
+	void setSigned(bool sign);
 	void beSigned(Bureaucrat &bureaucrat);
 
 	class GradeTooHighException : public std::exception

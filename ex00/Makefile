@@ -4,13 +4,13 @@ CFLAGS = -Wall -Wextra -Werror -g -pedantic -std=c++11 -fsanitize=address
 SRCS = $(wildcard *.cpp) 
 OBJS = $(patsubst %.cpp,obj/%.o,$(SRCS))
 
-TARGET = Bureaucrat
+TARGET = bureaucrat
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(TARGET)
-	@echo "$(GREEN)Compiled Bureaucrat!$(DEFAULT)"
+	@echo "$(GREEN)Compiled bureaucrat!$(DEFAULT)"
 
 obj/%.o: %.cpp | obj
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -24,7 +24,7 @@ clean:
 
 fclean: clean
 	@$(RM) $(TARGET)
-	@echo "$(RED)Removed Bureaucrat!$(DEFAULT)"
+	@echo "$(RED)Removed bureaucrat!$(DEFAULT)"
 
 re: fclean all
 

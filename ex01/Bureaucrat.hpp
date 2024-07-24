@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/15 13:38:25 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/02 20:45:37 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/03 16:54:15 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,6 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
-
-#define RED "\033[91m"
-#define GREEN "\033[92m"
-#define YELLOW "\033[93m"
-#define BLUE "\033[94m"
-#define PINK "\033[95m"
-#define RESET "\033[0m"
 
 class	Form;
 

@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/02 14:31:59 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/03 14:32:59 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/24 09:38:46 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,9 @@ std::string PresidentialPardonForm::getTarget(void) const
 	return (this->_target);
 }
 
-AForm	*PresidentialPardonForm::makeForm( AForm *form, std::string type, std::string target )
+AForm	*PresidentialPardonForm::makeForm(std::string target)
 {
-	if (form == NULL && type == "presidential pardon")
-		return (new PresidentialPardonForm(target));
-	return (form);
+	return (new PresidentialPardonForm(target));
 }
 
 void PresidentialPardonForm::executeForm(void) const

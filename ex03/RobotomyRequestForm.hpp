@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/02 14:32:05 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/03 14:35:01 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/03 12:45:02 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@ class RobotomyRequestForm : public AForm
 	RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
 	~RobotomyRequestForm();
 	std::string getTarget(void) const;
-	static AForm *makeForm(AForm *form, std::string type, std::string target);
 	void executeForm(void) const;
 };

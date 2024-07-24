@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/02 14:32:10 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/03 12:51:20 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/23 11:58:12 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,23 @@ std::string ShrubberyCreationForm::getTarget(void) const
 
 void ShrubberyCreationForm::executeForm(void) const
 {
-	std::string command = "tree > " + this->getTarget() + "_shrubbery";
-	const char *cmd = command.c_str();
-	system(cmd);
+	std::string filename = this->_target + "_shrubbery";
+	std::ofstream file(filename);
+
+	if (!file.is_open())
+	{
+		std::cerr << "Problem with opening file in ShrubberyCreationForm" << std::endl;
+		return ;
+	}
+
+	file << TREE;
+	if (!file) {
+        std::cerr << "Problem with writing to file in ShrubberyCreationForm" << std::endl;
+        return;
+    }
+	file.close();
+	
+	std::cout << "Shrubbery Creation made " << filename << " with a tree inside!" << std::endl;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()

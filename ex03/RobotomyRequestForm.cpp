@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/02 14:32:03 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/03 14:36:16 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/24 11:31:57 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,6 @@ std::string RobotomyRequestForm::getTarget(void) const
 	return (this->_target);
 }
 
-AForm *RobotomyRequestForm::makeForm(AForm *form, std::string type,
-	std::string target)
-{
-	if (form == NULL && type == "robotomy request")
-		return (new RobotomyRequestForm(target));
-	return (form);
-}
-
 void RobotomyRequestForm::executeForm(void) const
 {
 	std::mt19937 rng(std::random_device{}());
@@ -55,9 +47,9 @@ void RobotomyRequestForm::executeForm(void) const
 
 	std::cout << BLUE "* DRILLING NOISES *" RESET << std::endl;
 	if (chance)
-		std::cout << this->getTarget() << GREEN " has been robotomized!" RESET << std::endl;
+		std::cout << GREEN << this->getTarget() <<  " has been robotomized!" RESET << std::endl;
 	else
-		std::cout << this->getTarget() << RED " has failed to be robotomized!" RESET << std::endl;
+		std::cout << RED << this->getTarget() << " has failed to be robotomized!" RESET << std::endl;
 }
 
 RobotomyRequestForm::~RobotomyRequestForm()

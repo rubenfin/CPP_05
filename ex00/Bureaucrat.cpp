@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/15 13:38:23 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/02 20:44:15 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/04 14:30:20 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,61 +54,25 @@ int Bureaucrat::getGrade(void) const
 
 void Bureaucrat::incrementGrade(void)
 {
-	try
-	{
-		if (this->_grade - 1 < 1)
-			throw Bureaucrat::GradeTooHighException();
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << RED << e.what() << RESET << '\n';
-		return ;
-	}
-	this->_grade--;
+	incrementGrade(1);
 }
 
 void Bureaucrat::incrementGrade(int increment)
 {
-	try
-	{
-		if (this->_grade - increment < 1)
-			throw Bureaucrat::GradeTooHighException();
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << RED << e.what() << RESET << '\n';
-		return ;
-	}
+	if (this->_grade - increment < 1)
+		throw Bureaucrat::GradeTooHighException();
 	this->_grade -= increment;
 }
 
 void Bureaucrat::decrementGrade(void)
 {
-	try
-	{
-		if (this->_grade + 1 > 150)
-			throw Bureaucrat::GradeTooLowException();
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << RED << e.what() << RESET << '\n';
-		return ;
-	}
-	this->_grade++;
+	decrementGrade(1);
 }
 
 void Bureaucrat::decrementGrade(int decrement)
 {
-	try
-	{
-		if (this->_grade + decrement > 150)
-			throw Bureaucrat::GradeTooLowException();
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << RED << e.what() << RESET << '\n';
-		return ;
-	}
+	if (this->_grade + decrement > 150)
+		throw Bureaucrat::GradeTooLowException();
 	this->_grade += decrement;
 }
 

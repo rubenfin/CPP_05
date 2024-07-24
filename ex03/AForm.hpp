@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/31 16:36:00 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/03 14:50:23 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/24 11:26:57 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,9 @@ class AForm
 	int getExecuteGrade(void) const;
 	void beSigned(Bureaucrat &bureaucrat);
 	void execute(Bureaucrat const &executor) const;
-	static AForm *makeForm(std::string type, std::string target);
 	virtual std::string getTarget(void) const = 0;
 	virtual void executeForm(void) const = 0;
-
+	
 	class GradeTooHighException : public std::exception
 	{
 		public:
@@ -72,4 +71,4 @@ class AForm
 	};
 };
 
-std::ostream operator<<(std::ostream &os,const AForm &form);
+std::ostream &operator<<(std::ostream &os, AForm &form);

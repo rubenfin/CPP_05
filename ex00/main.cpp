@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/15 13:38:21 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/02 20:11:59 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/04 14:30:50 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(void)
 		}
 	}
 
-	std::cout << PINK "\n--throw exception when calling upGrade--" RESET << std::endl;
+	std::cout << PINK "\n--throw exception when calling incrementGrade --" RESET << std::endl;
 	{
 		try
 		{
@@ -57,15 +57,13 @@ int	main(void)
 		}
 	}
 
-	std::cout << PINK "\n--throw exception when calling downGrade--" RESET << std::endl;
+	std::cout << PINK "\n--throw exception when calling decrementGrade--" RESET << std::endl;
 	{
 		try
 		{
 			Bureaucrat Bob("Bob", 148);
 			std::cout << std::endl << Bob << std::endl;
 			Bob.decrementGrade(3);
-			std::cout << Bob << std::endl;
-			Bob.decrementGrade();
 			std::cout << Bob << std::endl;
 		}
 		catch (const std::exception &e)

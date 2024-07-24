@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/31 16:37:02 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/02 20:42:13 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/23 11:56:18 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ Form::Form(const std::string &name, int signGrade) : _name(name),
 		throw Form::GradeTooHighException();
 	else if (signGrade > 150)
 		throw Form::GradeTooLowException();
-	std::cout << "Made form " << this->_name << " with sign grade " << this->_signGrade << std::endl;  
+	std::cout << "Made form " << this->_name << " with sign grade " << this->_signGrade << std::endl;
 }
 
-Form::Form(const Form &other) : _name(other._name), _signGrade(other._signGrade), _executeGrade(other._executeGrade)
+Form::Form(const Form &other) : _name(other._name),
+	_signGrade(other._signGrade), _executeGrade(other._executeGrade)
 {
 	std::cout << "Copy constructor called!" << std::endl;
 	*this = other;
@@ -63,23 +64,18 @@ int Form::getExecuteGrade(void) const
 	return (this->_executeGrade);
 }
 
+void Form::setSigned(bool sign)
+{
+	this->_isSigned = sign;
+}
+
 void Form::beSigned(Bureaucrat &bureaucrat)
 {
-	try
-	{
-		bureaucrat.signForm(*this);
-	}
-	catch (const GradeTooLowException &e)
-	{
-		std::cout << bureaucrat.getName() << " couldn't sign " << this->getName() << " because his/her grade is too low!" << std::endl;
-		return ;
-	}
-	catch (const FormAlreadySignedException &e)
-	{
-		std::cout << bureaucrat.getName() << " couldn't sign " << this->getName() << " because this form is already signed!" << std::endl;
-		return ;
-	}
-	this->_isSigned = true;
+	if (this->_isSigned)
+		throw Form::FormAlreadySignedException();
+	if (this->_signGrade < bureaucrat.getGrade())
+		throw Form::GradeTooLowException();
+	this->_isSigned = true;	
 }
 const char *Form::GradeTooHighException::what(void) const noexcept
 {

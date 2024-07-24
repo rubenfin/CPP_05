@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/15 13:38:23 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/02 20:44:30 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/23 11:56:29 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,71 +55,45 @@ int Bureaucrat::getGrade(void) const
 
 void Bureaucrat::incrementGrade(void)
 {
-	try
-	{
-		if ((this->_grade - 1) < 1)
-			throw Bureaucrat::GradeTooHighException();
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << RED << e.what() << RESET << '\n';
-		return ;
-	}
-	this->_grade--;
+	incrementGrade(1);
 }
 
 void Bureaucrat::incrementGrade(int increment)
 {
-	try
-	{
-		if ((this->_grade - increment) < 1)
-			throw Bureaucrat::GradeTooHighException();
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << RED << e.what() << RESET << '\n';
-		return ;
-	}
+	if ((this->_grade - increment) < 1)
+		throw Bureaucrat::GradeTooHighException();
 	this->_grade -= increment;
 }
 
 void Bureaucrat::decrementGrade(void)
 {
-	try
-	{
-		if ((this->_grade + 1) > 150)
-			throw Bureaucrat::GradeTooLowException();
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << RED << e.what() << RESET << '\n';
-		return ;
-	}
-	this->_grade++;
+	decrementGrade(1);
 }
 
 void Bureaucrat::decrementGrade(int decrement)
 {
-	try
-	{
-		if ((this->_grade + decrement) > 150)
-			throw Bureaucrat::GradeTooLowException();
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << RED << e.what() << RESET << '\n';
-		return ;
-	}
+	if ((this->_grade + decrement) > 150)
+		throw Bureaucrat::GradeTooLowException();
 	this->_grade += decrement;
 }
 
 void Bureaucrat::signForm(Form &form)
 {
-	if (form.getSigned())
-		throw Form::FormAlreadySignedException();
-	if (form.getSignGrade() < this->getGrade())
-		throw Bureaucrat::GradeTooLowException();
-	std::cout << this->getName() << " signed " << form.getName() << std::endl;
+	try
+	{
+		form.beSigned(*this);
+	}
+	catch (const Form::GradeTooLowException &e)
+	{
+		std::cout << this->getName() << " couldn't sign " << form.getName() << " because his/her grade is too low!" << std::endl;
+		return ;
+	}
+	catch (const Form::FormAlreadySignedException &e)
+	{
+		std::cout << this->getName() << " couldn't sign " << form.getName() << " because this form is already signed!" << std::endl;
+		return ;
+	}
+	std::cout << this->getName() << " signed " << form.getName() << std::endl;;
 }
 
 const char *Bureaucrat::GradeTooHighException::what(void) const noexcept

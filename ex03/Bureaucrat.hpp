@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/15 13:38:25 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/03 14:54:53 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/04 16:09:25 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ class	AForm;
 
 class Bureaucrat
 {
-  private:
-	const std::string _name;
-	int _signGrade;
-	int _execGrade;
-
   public:
 	Bureaucrat(const std::string &name, int signGrade, int executeGrade);
 	Bureaucrat(const Bureaucrat &other);
@@ -59,6 +54,11 @@ class Bureaucrat
 		public:
 		const char *what(void) const noexcept override;
 	};
+
+  private:
+	const std::string _name;
+	int _signGrade;
+	int _execGrade;
 };
 
-std::ostream &operator<<(std::ostream &os, Bureaucrat &bureaucrat);
+std::ostream &operator<<(std::ostream &os, Bureaucrat obj);

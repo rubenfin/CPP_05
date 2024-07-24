@@ -1,16 +1,16 @@
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -g -pedantic -std=c++11 -fsanitize=address
-# CFLAGS = -Wall -Wextra -Werror -g -pedantic -std=c++11 
+# CFLAGS = -Wall -Wextra -Werror -g -pedantic -std=c++11 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -pedantic -std=c++11 
 SRCS = $(wildcard *.cpp) 
 OBJS = $(patsubst %.cpp,obj/%.o,$(SRCS))
 
-TARGET = Intern
+TARGET = intern
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(TARGET)
-	@echo "$(GREEN)Compiled Intern!$(DEFAULT)"
+	@echo "$(GREEN)Compiled intern!$(DEFAULT)"
 
 obj/%.o: %.cpp | obj
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -24,7 +24,7 @@ clean:
 
 fclean: clean
 	@$(RM) $(TARGET)
-	@echo "$(RED)Removed Intern!$(DEFAULT)"
+	@echo "$(RED)Removed intern!$(DEFAULT)"
 
 re: fclean all
 

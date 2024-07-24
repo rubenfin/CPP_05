@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/02 14:32:08 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/03 14:35:48 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/06/04 16:19:07 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 #include "AForm.hpp"
 #include <fstream>
 #include <iostream>
+
+#define TREE \
+"      /\\      \n" \
+"     /\\*\\     \n" \
+"    /\\O\\*\\    \n" \
+"   /*/\\/\\/\\   \n" \
+"  /\\O\\/\\*\\/\\  \n" \
+" /\\*\\/\\*\\/\\/\\ \n" \
+"/\\O\\/\\/*/\\/O/\\ \n" \
+"      ||      \n" \
+"      ||      \n" \
+"      ||      \n"
 
 class ShrubberyCreationForm : public AForm
 {
@@ -29,6 +41,5 @@ class ShrubberyCreationForm : public AForm
 	ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
 	~ShrubberyCreationForm();
 	std::string getTarget(void) const;
-	static AForm *makeForm(AForm *form, std::string type, std::string target);
 	void executeForm(void) const;
 };

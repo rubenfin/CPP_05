@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/31 16:37:02 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/06/03 12:50:49 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/07/23 12:05:51 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,20 @@ AForm::~AForm()
 
 void AForm::beSigned(Bureaucrat &bureaucrat)
 {
-	try
-	{
-		bureaucrat.signForm(*this);
-	}
-	catch (const std::exception &e)
-	{
-		std::cout << bureaucrat.getName() << " couldn't sign " << this->getName() << " because his/her grade is too low!" << std::endl;
-		return ;
-	}
+	if (this->_isSigned)
+		throw AForm::FormAlreadySignedException();
+	if (this->_signGrade < bureaucrat.getSignGrade())
+		throw AForm::GradeTooLowException();
 	this->_isSigned = true;
 }
 
-void AForm::execute(Bureaucrat const &executor) const
+void AForm::execute(Bureaucrat const &bureaucrat) const
 {
 	if (!this->_isSigned)
 		throw AForm::FormNotSignedException();
-	if (this->_signGrade < executor.getSignGrade()
-		|| this->_executeGrade < executor.getExecuteGrade())
+	if (this->_executeGrade < bureaucrat.getExecuteGrade())
 		throw Bureaucrat::GradeTooLowException();
-	executor.executeForm(*this);
+	bureaucrat.executeForm(*this);
 }
 
 const std::string AForm::getName(void) const
