@@ -6,7 +6,7 @@
 /*   By: rfinneru <rfinneru@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/02 18:14:45 by rfinneru      #+#    #+#                 */
-/*   Updated: 2024/07/24 12:00:10 by rfinneru      ########   odam.nl         */
+/*   Updated: 2024/11/04 09:19:13 by rfinneru      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,21 @@ AForm* createForm(const std::string& target) {
     return new FormType(target);
 }
 
-AForm	*Intern::makeForm(const std::string &formName, const std::string &target )
+AForm* Intern::makeForm(const std::string &formName, const std::string &target)
 {
-	std::map<std::string, std::function<AForm*()>> findForm;
-    findForm["presidential pardon"] = [&target]() { return createForm<PresidentialPardonForm>(target); };
-    findForm["shrubbery creation"] = [&target]() { return createForm<ShrubberyCreationForm>(target); };
-    findForm["robotomy request"] = [&target]() { return createForm<RobotomyRequestForm>(target); };
+    const std::array<std::pair<std::string, std::function<AForm*()>>, 3> formArray = {{
+        {"presidential pardon", [&target]() { return createForm<PresidentialPardonForm>(target); }},
+        {"shrubbery creation", [&target]() { return createForm<ShrubberyCreationForm>(target); }},
+        {"robotomy request", [&target]() { return createForm<RobotomyRequestForm>(target); }}
+    }};
 
-    auto it = findForm.find(formName);
-        if (it != findForm.end())
-            return it->second();
-        else {
-            throw Intern::FormNotFoundException();           
+    for (const auto &formPair : formArray) {
+        if (formPair.first == formName) {
+            return formPair.second();
         }
+    }
+
+    throw Intern::FormNotFoundException();
 }
 
 const char *Intern::FormNotFoundException::what(void) const noexcept
